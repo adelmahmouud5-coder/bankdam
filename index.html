@@ -12,73 +12,142 @@
     --shadow: 0 4px 20px rgba(192,0,12,0.12);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Cairo',sans-serif; background:var(--cream); color:var(--dark); min-height:100vh; padding-bottom: 40px; }
+  body { font-family:'Cairo',sans-serif; background:var(--cream); color:var(--dark); min-height:100vh; }
+
+  /* HEADER */
   header { background:var(--red-dark); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 12px rgba(0,0,0,0.3); position:sticky; top:0; z-index:100; }
   .logo { display:flex; align-items:center; gap:10px; }
-  .logo-drop { font-size:28px; }
-  .logo-text h1 { font-size:18px; font-weight:900; color:white; }
-  .admin-btn-header { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; padding:6px 14px; border-radius:20px; cursor:pointer; }
+  .logo-drop { font-size:28px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+  .logo-text h1 { font-size:18px; font-weight:900; color:white; line-height:1.2; }
+  .logo-text span { font-size:11px; color:rgba(255,255,255,0.7); }
+  .admin-btn-header { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; padding:6px 14px; border-radius:20px; font-family:'Cairo',sans-serif; font-size:12px; cursor:pointer; }
+
+  /* باقي الـ CSS كما هو في كودك الأصلي */
   .hero { background:linear-gradient(135deg,var(--red-dark),var(--red)); padding:40px 20px 50px; text-align:center; color:white; }
-  .stats-bar { background:white; margin:-20px 16px 0; border-radius:16px; padding:16px 20px; display:flex; justify-content:space-around; box-shadow:var(--shadow); }
+  .stats-bar { background:white; margin:-20px 16px 0; border-radius:16px; padding:16px 20px; display:flex; justify-content:space-around; box-shadow:var(--shadow); position:relative; z-index:2; }
+  .stat-item { text-align:center; }
   .stat-num { font-size:22px; font-weight:900; color:var(--red); display:block; }
+  .stat-label { font-size:11px; color:var(--gray); margin-top:2px; }
+  .stat-divider { width:1px; background:var(--border); }
   .main-actions { padding:30px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .action-card { background:white; border-radius:16px; padding:24px 16px; text-align:center; cursor:pointer; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+  .action-card { background:white; border-radius:16px; padding:24px 16px; text-align:center; cursor:pointer; transition:all .25s; box-shadow:0 2px 12px rgba(0,0,0,.06); border:2px solid transparent; }
+  .action-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+  .action-card.register { border-color:var(--red); }
+  .action-card.search { border-color:#2D7A3A; }
+  .action-card .card-icon { font-size:36px; margin-bottom:10px; display:block; }
+  .action-card h3 { font-size:15px; font-weight:700; margin-bottom:6px; }
+  .action-card.register h3 { color:var(--red-dark); }
+  .action-card.search h3 { color:#2D7A3A; }
+  .action-card p { font-size:12px; color:var(--gray); line-height:1.5; }
   .section { padding:8px 16px 20px; }
+  .section-title { font-size:14px; font-weight:700; color:var(--gray); margin-bottom:12px; }
   .blood-types-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
-  .blood-type-btn { background:white; border:2px solid var(--border); border-radius:12px; padding:12px 4px; cursor:pointer; }
-  .blood-type-btn.active { background:var(--red); border-color:var(--red); color:white; }
-  .donor-card { background:white; border-radius:16px; padding:16px; margin-bottom:12px; display:flex; align-items:center; gap:10px; border-right:4px solid var(--red); }
-  .donor-blood { background:var(--red); color:white; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; }
-  .donor-info { flex:1; }
-  .call-btn { background:#007bff; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; }
-  .whatsapp-btn { background:#25D366; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:20px; }
+  .blood-type-btn { background:white; border:2px solid var(--border); border-radius:12px; padding:12px 4px; text-align:center; cursor:pointer; transition:all .2s; font-family:'Cairo',sans-serif; }
+  .blood-type-btn:hover,.blood-type-btn.active { background:var(--red); border-color:var(--red); color:white; }
+  .bt-symbol { font-size:18px; font-weight:900; display:block; line-height:1; }
+  .bt-count { font-size:10px; color:var(--gray); margin-top:3px; }
+  .blood-type-btn.active .bt-count { color:rgba(255,255,255,.8); }
   .page { display:none; } .page.active { display:block; }
-  footer { text-align: center; padding: 30px; font-size: 14px; color: var(--gray); font-weight: 600; }
+  .page-header { background:white; padding:16px 20px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--border); position:sticky; top:65px; z-index:50; }
+  .back-btn { background:var(--light-gray); border:none; border-radius:50%; width:36px; height:36px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .page-header h2 { font-size:17px; font-weight:700; }
+  .form-body { padding:20px 16px; }
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+  .form-group label span { color:var(--red); margin-right:2px; }
+  .form-group input,.form-group select { width:100%; padding:12px 14px; border:2px solid var(--border); border-radius:12px; font-family:'Cairo',sans-serif; font-size:14px; background:white; transition:border-color .2s; color:var(--dark); outline:none; }
+  .form-group input:focus,.form-group select:focus { border-color:var(--red); }
+  .blood-type-selector { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .bt-option { border:2px solid var(--border); border-radius:12px; padding:10px 4px; text-align:center; cursor:pointer; transition:all .2s; font-family:'Cairo',sans-serif; background:white; font-size:16px; font-weight:700; }
+  .bt-option:hover { border-color:var(--red); color:var(--red); }
+  .bt-option.selected { background:var(--red); border-color:var(--red); color:white; }
+  .submit-btn { width:100%; background:var(--red); color:white; border:none; border-radius:14px; padding:15px; font-family:'Cairo',sans-serif; font-size:16px; font-weight:700; cursor:pointer; transition:all .2s; margin-top:8px; }
+  .submit-btn:hover { background:var(--red-dark); }
+  .submit-btn:disabled { background:#ccc; cursor:not-allowed; }
+  .search-filters { padding:16px; background:white; border-bottom:1px solid var(--border); }
+  .filter-label { font-size:13px; font-weight:600; margin-bottom:10px; }
+  .results-area { padding:16px; }
+  .donor-card { background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,.06); display:flex; align-items:center; gap:10px; border-right:4px solid var(--red); }
+  .donor-blood { background:var(--red); color:white; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:900; flex-shrink:0; }
+  .donor-info { flex:1; }
+  .donor-name { font-size:15px; font-weight:700; margin-bottom:3px; }
+  .donor-meta { font-size:12px; color:var(--gray); display:flex; gap:10px; flex-wrap:wrap; }
+  .donor-available { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:6px; display:inline-block; }
+  .available { background:#E8F5EA; color:#2D7A3A; }
+  .unavailable { background:#FFF0F0; color:#C0000C; }
+  
+  /* الإضافة الجديدة: أزرار الاتصال */
+  .call-btn { background:#007bff; color:white; border:none; border-radius:50%; width:42px; height:42px; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none; flex-shrink:0; }
+  .whatsapp-btn { background:#25D366; color:white; border:none; border-radius:50%; width:42px; height:42px; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none; flex-shrink:0; }
+  
+  .empty-state { text-align:center; padding:50px 20px; color:var(--gray); }
+  .empty-state .empty-icon { font-size:50px; margin-bottom:12px; }
+  .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--dark); color:white; padding:12px 24px; border-radius:30px; font-size:14px; font-weight:600; z-index:999; transition:transform .3s; white-space:nowrap; max-width:90vw; text-align:center; }
+  .toast.show { transform:translateX(-50%) translateY(0); }
+  .toast.success { background:var(--success); }
+  .toast.error { background:var(--red); }
+  .result-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:500; }
+  .result-modal-overlay.show { display:block; }
+  .result-modal-box { background:white; border-radius:24px; padding:32px 24px; text-align:center; width:calc(100% - 40px); max-width:340px; margin:120px auto 0; }
+  .result-modal-icon { font-size:64px; margin-bottom:16px; }
+  .result-modal-title { font-size:22px; font-weight:900; margin-bottom:10px; }
+  .result-modal-msg { font-size:14px; color:var(--gray); margin-bottom:24px; line-height:1.7; }
+  .result-modal-btn { width:100%; background:var(--red); color:white; border:none; border-radius:14px; padding:14px; font-family:'Cairo',sans-serif; font-size:16px; font-weight:700; cursor:pointer; }
+  .admin-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:200; align-items:center; justify-content:center; padding:20px; }
+  .admin-overlay.show { display:flex; }
+  .admin-modal { background:white; border-radius:20px; padding:24px; width:100%; max-width:420px; max-height:85vh; overflow-y:auto; }
+  .admin-modal h3 { font-size:18px; font-weight:700; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; }
+  .close-modal { background:none; border:none; font-size:22px; cursor:pointer; color:var(--gray); }
+  .admin-table { width:100%; border-collapse:collapse; font-size:12px; }
+  .admin-table th { background:var(--light-gray); padding:8px 6px; text-align:right; font-weight:700; border-bottom:2px solid var(--border); }
+  .admin-table td { padding:8px 6px; border-bottom:1px solid var(--border); }
+  .delete-row { background:none; border:none; color:var(--red); cursor:pointer; font-size:16px; padding:4px; }
+  .spinner { width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--red); border-radius:50%; animation:spin .8s linear infinite; margin:30px auto; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .info-banner { background:linear-gradient(135deg,#FFF3CD,#FFE69C); border-right:4px solid #FFC107; margin:16px; padding:12px 14px; border-radius:12px; font-size:13px; color:#664D03; line-height:1.6; }
+
+  /* الإضافة الجديدة: الفوتر */
+  .footer-credit { text-align: center; padding: 20px; color: var(--gray); font-size: 13px; font-weight: 600; opacity: 0.7; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <span class="logo-drop">🩸</span>
-    <div class="logo-text"><h1>بنك دم الديرس</h1></div>
-  </div>
-  <button class="admin-btn-header" onclick="openAdminLogin()">⚙️ أدمن</button>
-</header>
-
-<div id="page-home" class="page active">
-  <div class="hero">
-    <h2>❤️ دمك بينقذ حياة</h2>
-    <p>سجّل بياناتك وكن جزء من شبكة التبرع بالدم في الديرس</p>
-  </div>
-  <div class="main-actions">
-    <div class="action-card" onclick="showPage('page-register')">📝 سجّل كمتبرع</div>
-    <div class="action-card" onclick="showPage('page-search')">🔍 ابحث عن دم</div>
-  </div>
-</div>
-
-<footer>
-  Made by Adel Elbatawy
-</footer>
-
 <script>
-// دالة renderResults المحدثة التي تحتوي على أزرار الاتصال
 function renderResults() {
   const container = document.getElementById('search-results');
-  container.innerHTML = allDonors.map(d => `
-    <div class="donor-card">
-      <div class="donor-blood">${d.blood_type}</div>
-      <div class="donor-info">
-        <div class="donor-name">${d.name}</div>
-        <div class="donor-meta">📞 ${d.phone}</div>
+  const onlyAvail = document.getElementById('filter-available')?.checked;
+  let list = allDonors;
+  if (searchFilter!=='all') list = list.filter(d=>d.blood_type===searchFilter);
+  if (onlyAvail) list = list.filter(isAvailable);
+  list = [...list].sort((a,b)=>(isAvailable(a)?0:1)-(isAvailable(b)?0:1));
+
+  if (!list.length) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>مفيش متبرعين دلوقتي</p></div>`;
+    return;
+  }
+  
+  container.innerHTML = list.map(d=>{
+    const avail = isAvailable(d);
+    return `
+      <div class="donor-card">
+        <div class="donor-blood">${d.blood_type}</div>
+        <div class="donor-info">
+          <div class="donor-name">${d.name}</div>
+          <div class="donor-meta"><span>📞 ${d.phone}</span></div>
+          <div class="donor-available ${avail?'available':'unavailable'}">
+            ${avail ? '✅ متاح للتبرع' : '⏳ غير متاح'}
+          </div>
+        </div>
+        <a href="tel:${d.phone}" class="call-btn">📞</a>
+        <a href="https://wa.me/${d.phone.replace(/^0/, '20')}" target="_blank" class="whatsapp-btn">💬</a>
       </div>
-      <a href="tel:${d.phone}" class="call-btn">📞</a>
-      <a href="https://wa.me/${d.phone.replace(/^0/, '20')}" target="_blank" class="whatsapp-btn">💬</a>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
-// باقي دوال JavaScript الخاصة بك ...
 </script>
+
+<div class="footer-credit">Made by Adel Elbatawy</div>
 
 </body>
 </html>
