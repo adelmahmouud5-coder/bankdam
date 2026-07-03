@@ -7,8 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --red: #C0000C; --red-dark: #8B0000; --cream: #FFF8F8; --dark: #1A0A0A;
-    --gray: #6B6B6B; --light-gray: #F5F5F5; --border: #E8D5D5; --success: #2D7A3A;
+    --red: #C0000C;
+    --red-dark: #8B0000;
+    --cream: #FFF8F8;
+    --dark: #1A0A0A;
+    --gray: #6B6B6B;
+    --light-gray: #F5F5F5;
+    --border: #E8D5D5;
+    --success: #2D7A3A;
     --shadow: 0 4px 20px rgba(192,0,12,0.12);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -23,13 +29,19 @@
   .logo-text span { font-size:11px; color:rgba(255,255,255,0.7); }
   .admin-btn-header { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; padding:6px 14px; border-radius:20px; font-family:'Cairo',sans-serif; font-size:12px; cursor:pointer; }
 
-  /* باقي الـ CSS كما هو في كودك الأصلي */
+  /* HERO */
   .hero { background:linear-gradient(135deg,var(--red-dark),var(--red)); padding:40px 20px 50px; text-align:center; color:white; }
+  .hero h2 { font-size:26px; font-weight:900; margin-bottom:8px; }
+  .hero p { font-size:14px; opacity:.85; margin-bottom:30px; line-height:1.7; }
+
+  /* STATS */
   .stats-bar { background:white; margin:-20px 16px 0; border-radius:16px; padding:16px 20px; display:flex; justify-content:space-around; box-shadow:var(--shadow); position:relative; z-index:2; }
   .stat-item { text-align:center; }
   .stat-num { font-size:22px; font-weight:900; color:var(--red); display:block; }
   .stat-label { font-size:11px; color:var(--gray); margin-top:2px; }
   .stat-divider { width:1px; background:var(--border); }
+
+  /* ACTIONS */
   .main-actions { padding:30px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .action-card { background:white; border-radius:16px; padding:24px 16px; text-align:center; cursor:pointer; transition:all .25s; box-shadow:0 2px 12px rgba(0,0,0,.06); border:2px solid transparent; }
   .action-card:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
@@ -40,6 +52,8 @@
   .action-card.register h3 { color:var(--red-dark); }
   .action-card.search h3 { color:#2D7A3A; }
   .action-card p { font-size:12px; color:var(--gray); line-height:1.5; }
+
+  /* BLOOD GRID */
   .section { padding:8px 16px 20px; }
   .section-title { font-size:14px; font-weight:700; color:var(--gray); margin-bottom:12px; }
   .blood-types-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
@@ -48,10 +62,17 @@
   .bt-symbol { font-size:18px; font-weight:900; display:block; line-height:1; }
   .bt-count { font-size:10px; color:var(--gray); margin-top:3px; }
   .blood-type-btn.active .bt-count { color:rgba(255,255,255,.8); }
-  .page { display:none; } .page.active { display:block; }
+
+  /* PAGES */
+  .page { display:none; }
+  .page.active { display:block; }
+
+  /* PAGE HEADER */
   .page-header { background:white; padding:16px 20px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--border); position:sticky; top:65px; z-index:50; }
   .back-btn { background:var(--light-gray); border:none; border-radius:50%; width:36px; height:36px; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
   .page-header h2 { font-size:17px; font-weight:700; }
+
+  /* FORMS */
   .form-body { padding:20px 16px; }
   .form-group { margin-bottom:16px; }
   .form-group label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
@@ -65,10 +86,12 @@
   .submit-btn { width:100%; background:var(--red); color:white; border:none; border-radius:14px; padding:15px; font-family:'Cairo',sans-serif; font-size:16px; font-weight:700; cursor:pointer; transition:all .2s; margin-top:8px; }
   .submit-btn:hover { background:var(--red-dark); }
   .submit-btn:disabled { background:#ccc; cursor:not-allowed; }
+
+  /* SEARCH */
   .search-filters { padding:16px; background:white; border-bottom:1px solid var(--border); }
   .filter-label { font-size:13px; font-weight:600; margin-bottom:10px; }
   .results-area { padding:16px; }
-  .donor-card { background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,.06); display:flex; align-items:center; gap:10px; border-right:4px solid var(--red); }
+  .donor-card { background:white; border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,.06); display:flex; align-items:center; gap:14px; border-right:4px solid var(--red); }
   .donor-blood { background:var(--red); color:white; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:900; flex-shrink:0; }
   .donor-info { flex:1; }
   .donor-name { font-size:15px; font-weight:700; margin-bottom:3px; }
@@ -76,17 +99,17 @@
   .donor-available { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:6px; display:inline-block; }
   .available { background:#E8F5EA; color:#2D7A3A; }
   .unavailable { background:#FFF0F0; color:#C0000C; }
-  
-  /* الإضافة الجديدة: أزرار الاتصال */
-  .call-btn { background:#007bff; color:white; border:none; border-radius:50%; width:42px; height:42px; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none; flex-shrink:0; }
   .whatsapp-btn { background:#25D366; color:white; border:none; border-radius:50%; width:42px; height:42px; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; text-decoration:none; flex-shrink:0; }
-  
   .empty-state { text-align:center; padding:50px 20px; color:var(--gray); }
   .empty-state .empty-icon { font-size:50px; margin-bottom:12px; }
+
+  /* TOAST */
   .toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--dark); color:white; padding:12px 24px; border-radius:30px; font-size:14px; font-weight:600; z-index:999; transition:transform .3s; white-space:nowrap; max-width:90vw; text-align:center; }
   .toast.show { transform:translateX(-50%) translateY(0); }
   .toast.success { background:var(--success); }
   .toast.error { background:var(--red); }
+
+  /* RESULT MODAL */
   .result-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:500; }
   .result-modal-overlay.show { display:block; }
   .result-modal-box { background:white; border-radius:24px; padding:32px 24px; text-align:center; width:calc(100% - 40px); max-width:340px; margin:120px auto 0; }
@@ -94,6 +117,8 @@
   .result-modal-title { font-size:22px; font-weight:900; margin-bottom:10px; }
   .result-modal-msg { font-size:14px; color:var(--gray); margin-bottom:24px; line-height:1.7; }
   .result-modal-btn { width:100%; background:var(--red); color:white; border:none; border-radius:14px; padding:14px; font-family:'Cairo',sans-serif; font-size:16px; font-weight:700; cursor:pointer; }
+
+  /* ADMIN */
   .admin-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:200; align-items:center; justify-content:center; padding:20px; }
   .admin-overlay.show { display:flex; }
   .admin-modal { background:white; border-radius:20px; padding:24px; width:100%; max-width:420px; max-height:85vh; overflow-y:auto; }
@@ -106,14 +131,494 @@
   .spinner { width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--red); border-radius:50%; animation:spin .8s linear infinite; margin:30px auto; }
   @keyframes spin { to{transform:rotate(360deg)} }
   .info-banner { background:linear-gradient(135deg,#FFF3CD,#FFE69C); border-right:4px solid #FFC107; margin:16px; padding:12px 14px; border-radius:12px; font-size:13px; color:#664D03; line-height:1.6; }
-
-  /* الإضافة الجديدة: الفوتر */
-  .footer-credit { text-align: center; padding: 20px; color: var(--gray); font-size: 13px; font-weight: 600; opacity: 0.7; }
 </style>
 </head>
 <body>
 
+<header>
+  <div class="logo">
+    <span class="logo-drop">🩸</span>
+    <div class="logo-text">
+      <h1>بنك دم الديرس</h1>
+      <span>تبرع بدمك — أنقذ روح</span>
+    </div>
+  </div>
+  <button class="admin-btn-header" onclick="openAdminLogin()">⚙️ أدمن</button>
+</header>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <h2>❤️ دمك بينقذ حياة</h2>
+    <p>سجّل بياناتك وكن جزء من شبكة التبرع بالدم في الديرس</p>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-num" id="total-donors">...</span>
+      <div class="stat-label">متبرع مسجل</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" id="available-donors">...</span>
+      <div class="stat-label">متاح الآن</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">8</span>
+      <div class="stat-label">فصيلة دم</div>
+    </div>
+  </div>
+  <div class="main-actions">
+    <div class="action-card register" onclick="showPage('page-register')">
+      <span class="card-icon">📝</span>
+      <h3>سجّل كمتبرع</h3>
+      <p>أضف بياناتك لقائمة المتبرعين</p>
+    </div>
+    <div class="action-card search" onclick="showPage('page-search')">
+      <span class="card-icon">🔍</span>
+      <h3>ابحث عن دم</h3>
+      <p>ابحث عن متبرع بفصيلة معينة</p>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🩸 ابحث بفصيلة الدم</div>
+    <div class="blood-types-grid" id="home-blood-grid"></div>
+  </div>
+  <div class="info-banner">
+    💡 <strong>مهم:</strong> المتبرع يكون مناسب للتبرع بعد مرور 3 شهور من آخر تبرع.
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div id="page-register" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="showPage('page-home')">◀</button>
+    <h2>📝 سجّل كمتبرع</h2>
+  </div>
+  <div class="form-body">
+    <div class="form-group">
+      <label><span>*</span> الاسم رباعي (4 أسماء)</label>
+      <input type="text" id="reg-name" placeholder="مثال: محمد أحمد علي حسن" maxlength="80">
+    </div>
+    <div class="form-group">
+      <label><span>*</span> رقم الموبايل</label>
+      <input type="tel" id="reg-phone" placeholder="01xxxxxxxxx" maxlength="11">
+    </div>
+    <div class="form-group">
+      <label><span>*</span> فصيلة الدم</label>
+      <div class="blood-type-selector">
+        <button class="bt-option" onclick="selectBT(this,'A+')">A+</button>
+        <button class="bt-option" onclick="selectBT(this,'A-')">A-</button>
+        <button class="bt-option" onclick="selectBT(this,'B+')">B+</button>
+        <button class="bt-option" onclick="selectBT(this,'B-')">B-</button>
+        <button class="bt-option" onclick="selectBT(this,'AB+')">AB+</button>
+        <button class="bt-option" onclick="selectBT(this,'AB-')">AB-</button>
+        <button class="bt-option" onclick="selectBT(this,'O+')">O+</button>
+        <button class="bt-option" onclick="selectBT(this,'O-')">O-</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><span>*</span> آخر 4 أرقام من بطاقتك</label>
+      <input type="tel" id="reg-nid" placeholder="1234" maxlength="4" style="letter-spacing:4px;font-size:18px;">
+      <small style="color:var(--gray);font-size:11px;margin-top:4px;display:block;">⚠️ هتحتاجها لو عاوز تعدل بياناتك بعدين</small>
+    </div>
+    <div class="form-group">
+      <label>آخر مرة تبرعت (اختياري)</label>
+      <input type="date" id="reg-last-donate">
+    </div>
+    <button class="submit-btn" onclick="registerDonor()" id="reg-btn">✅ سجّل اسمي</button>
+    <button class="submit-btn" style="background:#6c757d;margin-top:8px;" onclick="showPage('page-update')">✏️ تحديث بياناتي</button>
+  </div>
+</div>
+
+<!-- UPDATE -->
+<div id="page-update" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="showPage('page-home')">◀</button>
+    <h2>✏️ تحديث بياناتي</h2>
+  </div>
+  <div class="form-body">
+    <div class="form-group">
+      <label><span>*</span> رقم موبايلك</label>
+      <input type="tel" id="upd-phone-search" placeholder="01xxxxxxxxx" maxlength="11">
+    </div>
+    <div class="form-group">
+      <label><span>*</span> آخر 4 أرقام من بطاقتك</label>
+      <input type="tel" id="upd-nid-search" placeholder="1234" maxlength="4" style="letter-spacing:4px;font-size:18px;">
+    </div>
+    <button class="submit-btn" onclick="findDonor()" id="upd-search-btn">🔍 ابحث عن بياناتي</button>
+    <div id="upd-form" style="display:none;margin-top:20px;">
+      <div style="background:#E8F5EA;padding:12px;border-radius:10px;margin-bottom:16px;font-size:13px;color:#2D7A3A;">✅ تم العثور على بياناتك</div>
+      <div class="form-group">
+        <label>الاسم</label>
+        <input type="text" id="upd-name" maxlength="80">
+      </div>
+      <div class="form-group">
+        <label>رقم الموبايل الجديد</label>
+        <input type="tel" id="upd-phone-new" maxlength="11">
+      </div>
+      <div class="form-group">
+        <label>فصيلة الدم</label>
+        <div class="blood-type-selector" id="upd-bt-selector">
+          <button class="bt-option" onclick="selectUpdBT(this,'A+')">A+</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'A-')">A-</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'B+')">B+</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'B-')">B-</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'AB+')">AB+</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'AB-')">AB-</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'O+')">O+</button>
+          <button class="bt-option" onclick="selectUpdBT(this,'O-')">O-</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>آخر مرة تبرعت</label>
+        <input type="date" id="upd-last-donate">
+      </div>
+      <button class="submit-btn" onclick="updateDonor()" id="upd-save-btn">💾 حفظ التعديلات</button>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div id="page-search" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="showPage('page-home')">◀</button>
+    <h2>🔍 ابحث عن متبرع</h2>
+  </div>
+  <div class="search-filters">
+    <div class="filter-label">اختار فصيلة الدم:</div>
+    <div class="blood-types-grid">
+      <button class="blood-type-btn active" onclick="filterBT(this,'all')"><span class="bt-symbol" style="font-size:13px">الكل</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'A+')"><span class="bt-symbol">A+</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'A-')"><span class="bt-symbol">A-</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'B+')"><span class="bt-symbol">B+</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'B-')"><span class="bt-symbol">B-</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'AB+')"><span class="bt-symbol">AB+</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'AB-')"><span class="bt-symbol">AB-</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'O+')"><span class="bt-symbol">O+</span></button>
+      <button class="blood-type-btn" onclick="filterBT(this,'O-')"><span class="bt-symbol">O-</span></button>
+    </div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+      <input type="checkbox" id="filter-available" onchange="renderResults()" style="width:18px;height:18px;accent-color:var(--red);">
+      <label for="filter-available" style="font-size:13px;font-weight:600;cursor:pointer;">✅ متاح للتبرع دلوقتي بس</label>
+    </div>
+  </div>
+  <div class="results-area" id="search-results">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<!-- RESULT MODAL -->
+<div class="result-modal-overlay" id="result-modal">
+  <div class="result-modal-box">
+    <div class="result-modal-icon" id="rm-icon"></div>
+    <div class="result-modal-title" id="rm-title"></div>
+    <div class="result-modal-msg" id="rm-msg"></div>
+    <button class="result-modal-btn" onclick="closeResultModal()">حسناً</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-overlay" id="admin-overlay">
+  <div class="admin-modal">
+    <h3>
+      <span id="admin-modal-title">🔐 دخول الأدمن</span>
+      <button class="close-modal" onclick="closeAdmin()">✕</button>
+    </h3>
+    <div id="admin-login-form">
+      <div class="form-group">
+        <label>كلمة السر</label>
+        <input type="password" id="admin-pass" placeholder="أدخل الباسورد" onkeydown="if(event.key==='Enter')adminLogin()">
+      </div>
+      <button class="submit-btn" onclick="adminLogin()">دخول</button>
+    </div>
+    <div id="admin-change-form" style="display:none;">
+      <div style="background:#FFF3CD;border-right:4px solid #FFC107;padding:12px;border-radius:10px;margin-bottom:16px;font-size:13px;color:#664D03;">
+        ⚠️ لازم تغير كلمة السر الافتراضية قبل الدخول
+      </div>
+      <div class="form-group">
+        <label>كلمة السر الجديدة</label>
+        <input type="password" id="new-pass" placeholder="6 أحرف على الأقل">
+      </div>
+      <div class="form-group">
+        <label>تأكيد كلمة السر</label>
+        <input type="password" id="confirm-pass" placeholder="أعد الكتابة">
+      </div>
+      <button class="submit-btn" onclick="changeAdminPass()">✅ حفظ وتسجيل الدخول</button>
+    </div>
+    <div id="admin-dashboard" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+        <button class="submit-btn" style="margin:0;font-size:13px;padding:10px;" onclick="loadAdminData()">🔄 تحديث</button>
+        <button class="submit-btn" style="margin:0;font-size:13px;padding:10px;background:#0F9D58;" onclick="openInSheets()">📊 Sheets</button>
+      </div>
+      <button class="submit-btn" style="background:#6c757d;font-size:13px;padding:10px;margin-bottom:12px;" onclick="showAdminChangePass()">🔑 تغيير كلمة السر</button>
+      <button class="submit-btn" style="background:#2D7A3A;font-size:13px;padding:10px;margin-bottom:12px;" onclick="toggleAdminAddForm()">➕ إضافة متبرع يدوي</button>
+      <div id="admin-add-form" style="display:none;margin-bottom:16px;background:var(--light-gray);padding:14px;border-radius:12px;">
+        <div class="form-group">
+          <label><span>*</span> الاسم رباعي (4 أسماء)</label>
+          <input type="text" id="admin-add-name" placeholder="مثال: محمد أحمد علي حسن" maxlength="80">
+        </div>
+        <div class="form-group">
+          <label><span>*</span> رقم الموبايل</label>
+          <input type="tel" id="admin-add-phone" placeholder="01xxxxxxxxx" maxlength="11">
+        </div>
+        <div class="form-group">
+          <label><span>*</span> فصيلة الدم</label>
+          <div class="blood-type-selector" id="admin-add-bt-selector">
+            <button class="bt-option" onclick="selectAdminBT(this,'A+')">A+</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'A-')">A-</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'B+')">B+</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'B-')">B-</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'AB+')">AB+</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'AB-')">AB-</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'O+')">O+</button>
+            <button class="bt-option" onclick="selectAdminBT(this,'O-')">O-</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><span>*</span> آخر 4 أرقام من البطاقة</label>
+          <input type="tel" id="admin-add-nid" placeholder="1234" maxlength="4" style="letter-spacing:4px;font-size:18px;">
+        </div>
+        <div class="form-group">
+          <label>آخر مرة تبرع (اختياري)</label>
+          <input type="date" id="admin-add-last-donate">
+        </div>
+        <button class="submit-btn" style="margin:0;" onclick="adminAddDonor()" id="admin-add-btn">✅ إضافة المتبرع</button>
+      </div>
+      <div id="admin-stats" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;"></div>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead><tr><th>الاسم</th><th>فصيلة</th><th>موبايل</th><th>آخر تبرع</th><th></th></tr></thead>
+          <tbody id="admin-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
+const SUPABASE_URL = 'https://edizmrgmuhhyksxkxrij.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVkaXptcmdtdWhoeWtzeGt4cmlqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNjE2MTEsImV4cCI6MjA5ODYzNzYxMX0.1mFXdYFlsqWr8P5_yUdEEnvtvLdw7TUl0A6Dejsthuo';
+const DEFAULT_PASS = 'dires2024';
+const BLOOD_TYPES = ['A+','A-','B+','B-','AB+','AB-','O+','O-'];
+
+let allDonors = [];
+let searchFilter = 'all';
+let selectedBTVal = null;
+let updSelectedBTVal = null;
+let updDonorId = null;
+let rmCallback = null;
+
+// ===== SUPABASE =====
+async function db(path, opts={}) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    method: opts.method || 'GET',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || ''
+    },
+    body: opts.body ? JSON.stringify(opts.body) : undefined
+  });
+  if (!res.ok) {
+    const txt = await res.text();
+    let obj = {};
+    try { obj = JSON.parse(txt); } catch(_){}
+    const err = new Error(obj.message || txt);
+    err.code = obj.code || '';
+    throw err;
+  }
+  const text = await res.text();
+  if (!text) return null;
+  try { return JSON.parse(text); } catch(_) { return null; }
+}
+
+// ===== HELPERS: NAME / DUPLICATE CHECKS =====
+function normalizeName(s) {
+  return (s||'').trim().replace(/\s+/g,' ').toLowerCase();
+}
+function isFourPartName(name) {
+  return name.trim().split(/\s+/).filter(Boolean).length >= 4;
+}
+async function checkDuplicate(name, phone, excludeId=null) {
+  const normName = normalizeName(name);
+  const data = await db('donors?select=id,name,phone');
+  return (data||[]).find(d => d.id !== excludeId && (d.phone === phone || normalizeName(d.name) === normName));
+}
+
+// ===== LOAD DONORS =====
+async function loadDonors() {
+  try {
+    const data = await db('donors?select=*&order=created_at.desc');
+    allDonors = data || [];
+    updateStats();
+    buildHomeGrid();
+    if (document.getElementById('page-search').classList.contains('active')) renderResults();
+  } catch(e) { console.error(e); }
+}
+
+function isAvailable(d) {
+  if (!d.last_donation_date) return true;
+  const last = new Date(d.last_donation_date);
+  const ago = new Date();
+  ago.setMonth(ago.getMonth()-3);
+  return last <= ago;
+}
+
+function updateStats() {
+  document.getElementById('total-donors').textContent = allDonors.length;
+  document.getElementById('available-donors').textContent = allDonors.filter(isAvailable).length;
+}
+
+function buildHomeGrid() {
+  document.getElementById('home-blood-grid').innerHTML = BLOOD_TYPES.map(bt => {
+    const c = allDonors.filter(d=>d.blood_type===bt).length;
+    return `<button class="blood-type-btn" onclick="quickSearch('${bt}')"><span class="bt-symbol">${bt}</span><div class="bt-count">${c} متبرع</div></button>`;
+  }).join('');
+}
+
+// ===== NAVIGATION =====
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  if (id==='page-search') renderResults();
+}
+
+function quickSearch(bt) {
+  searchFilter = bt;
+  showPage('page-search');
+  setTimeout(()=>{
+    document.querySelectorAll('#page-search .blood-type-btn').forEach(b=>{
+      b.classList.toggle('active', b.querySelector('.bt-symbol')?.textContent===bt);
+    });
+    renderResults();
+  },50);
+}
+
+// ===== REGISTER =====
+function selectBT(btn, bt) {
+  document.querySelectorAll('#page-register .bt-option').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedBTVal = bt;
+}
+
+async function registerDonor() {
+  const name  = document.getElementById('reg-name').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const nid   = document.getElementById('reg-nid').value.trim();
+  const last  = document.getElementById('reg-last-donate').value;
+
+  if (!name)               { showToast('أدخل اسمك', 'error'); return; }
+  if (!isFourPartName(name)) { showToast('لازم تكتب الاسم رباعي (4 أسماء على الأقل)', 'error'); return; }
+  if (phone.length < 10)   { showToast('أدخل رقم موبايل صحيح', 'error'); return; }
+  if (!selectedBTVal)      { showToast('اختار فصيلة الدم', 'error'); return; }
+  if (nid.length !== 4)    { showToast('أدخل آخر 4 أرقام من بطاقتك', 'error'); return; }
+
+  const btn = document.getElementById('reg-btn');
+  btn.disabled = true;
+  btn.textContent = 'جاري التسجيل...';
+
+  try {
+    const dup = await checkDuplicate(name, phone);
+    if (dup) {
+      const reason = dup.phone === phone ? 'رقم الموبايل ده' : 'الاسم ده';
+      showResultModal('error','مسجل من قبل!', `${reason} مسجل قبل كده في بنك دم الديرس`);
+      return;
+    }
+    await db('donors', {
+      method: 'POST',
+      prefer: 'return=minimal',
+      body: { name, phone, blood_type: selectedBTVal, national_id_last4: nid, last_donation_date: last||null }
+    });
+    // تنظيف الفورم
+    document.getElementById('reg-name').value = '';
+    document.getElementById('reg-phone').value = '';
+    document.getElementById('reg-nid').value = '';
+    document.getElementById('reg-last-donate').value = '';
+    document.querySelectorAll('#page-register .bt-option').forEach(b=>b.classList.remove('selected'));
+    selectedBTVal = null;
+    loadDonors();
+    showResultModal('success','تم التسجيل بنجاح! 🎉','شكراً على تبرعك، اسمك اتضاف لقائمة المتبرعين في الديرس ❤️', ()=>showPage('page-home'));
+  } catch(e) {
+    if (e.code==='23505' || (e.message && e.message.includes('unique'))) {
+      showResultModal('error','مسجل من قبل!','رقم الموبايل ده مسجل قبل كده في بنك دم الديرس', ()=>showPage('page-home'));
+    } else {
+      showToast('حصل خطأ: '+e.message, 'error');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✅ سجّل اسمي';
+  }
+}
+
+// ===== UPDATE =====
+function selectUpdBT(btn, bt) {
+  document.querySelectorAll('#upd-bt-selector .bt-option').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  updSelectedBTVal = bt;
+}
+
+async function findDonor() {
+  const phone = document.getElementById('upd-phone-search').value.trim();
+  const nid   = document.getElementById('upd-nid-search').value.trim();
+  if (phone.length < 10) { showToast('أدخل رقم موبايل صحيح','error'); return; }
+  if (nid.length !== 4)  { showToast('أدخل آخر 4 أرقام من بطاقتك','error'); return; }
+
+  const btn = document.getElementById('upd-search-btn');
+  btn.disabled = true; btn.textContent = 'جاري البحث...';
+  try {
+    const data = await db(`donors?phone=eq.${phone}&select=*`);
+    if (!data || data.length===0) { showToast('مش لاقي رقمك','error'); return; }
+    const d = data[0];
+    if (d.national_id_last4 !== nid) { showToast('آخر 4 أرقام غلط','error'); return; }
+    updDonorId = d.id;
+    updSelectedBTVal = d.blood_type;
+    document.getElementById('upd-name').value = d.name;
+    document.getElementById('upd-phone-new').value = d.phone;
+    document.getElementById('upd-last-donate').value = d.last_donation_date||'';
+    document.querySelectorAll('#upd-bt-selector .bt-option').forEach(b=>b.classList.toggle('selected',b.textContent.trim()===d.blood_type));
+    document.getElementById('upd-form').style.display = 'block';
+  } catch(e) { showToast('حصل خطأ','error'); }
+  finally { btn.disabled=false; btn.textContent='🔍 ابحث عن بياناتي'; }
+}
+
+async function updateDonor() {
+  const name  = document.getElementById('upd-name').value.trim();
+  const phone = document.getElementById('upd-phone-new').value.trim();
+  const last  = document.getElementById('upd-last-donate').value;
+  if (!name)             { showToast('أدخل الاسم','error'); return; }
+  if (!isFourPartName(name)) { showToast('لازم يكون الاسم رباعي (4 أسماء على الأقل)','error'); return; }
+  if (phone.length < 10) { showToast('أدخل رقم صحيح','error'); return; }
+  if (!updSelectedBTVal) { showToast('اختار فصيلة الدم','error'); return; }
+
+  const btn = document.getElementById('upd-save-btn');
+  btn.disabled=true; btn.textContent='جاري الحفظ...';
+  try {
+    const dup = await checkDuplicate(name, phone, updDonorId);
+    if (dup) {
+      const reason = dup.phone === phone ? 'رقم الموبايل ده' : 'الاسم ده';
+      showToast(`${reason} مسجل لمتبرع تاني`,'error');
+      return;
+    }
+    await db(`donors?id=eq.${updDonorId}`, { method:'PATCH', prefer:'return=minimal', body:{name,phone,blood_type:updSelectedBTVal,last_donation_date:last||null} });
+    showResultModal('success','تم التحديث! ✅','تم حفظ بياناتك بنجاح', ()=>showPage('page-home'));
+    loadDonors();
+  } catch(e) { showToast('حصل خطأ: '+e.message,'error'); }
+  finally { btn.disabled=false; btn.textContent='💾 حفظ التعديلات'; }
+}
+
+// ===== SEARCH =====
+function filterBT(btn, bt) {
+  document.querySelectorAll('#page-search .blood-type-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  searchFilter = bt;
+  renderResults();
+}
+
 function renderResults() {
   const container = document.getElementById('search-results');
   const onlyAvail = document.getElementById('filter-available')?.checked;
@@ -123,31 +628,225 @@ function renderResults() {
   list = [...list].sort((a,b)=>(isAvailable(a)?0:1)-(isAvailable(b)?0:1));
 
   if (!list.length) {
-    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>مفيش متبرعين دلوقتي</p></div>`;
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>مفيش متبرعين دلوقتي<br>شارك الرابط عشان ناس تانية تسجل</p></div>`;
     return;
   }
-  
   container.innerHTML = list.map(d=>{
     const avail = isAvailable(d);
-    return `
-      <div class="donor-card">
-        <div class="donor-blood">${d.blood_type}</div>
-        <div class="donor-info">
-          <div class="donor-name">${d.name}</div>
-          <div class="donor-meta"><span>📞 ${d.phone}</span></div>
-          <div class="donor-available ${avail?'available':'unavailable'}">
-            ${avail ? '✅ متاح للتبرع' : '⏳ غير متاح'}
-          </div>
-        </div>
-        <a href="tel:${d.phone}" class="call-btn">📞</a>
-        <a href="https://wa.me/${d.phone.replace(/^0/, '20')}" target="_blank" class="whatsapp-btn">💬</a>
+    const last = d.last_donation_date ? new Date(d.last_donation_date).toLocaleDateString('ar-EG') : 'غير محدد';
+    const wa = `https://wa.me/2${d.phone}?text=${encodeURIComponent(`أهلاً ${d.name}، أنا محتاج دم فصيلة ${d.blood_type} من بنك دم الديرس`)}`;
+    return `<div class="donor-card">
+      <div class="donor-blood">${d.blood_type}</div>
+      <div class="donor-info">
+        <div class="donor-name">${d.name}</div>
+        <div class="donor-meta"><span>📱 ${d.phone}</span><span>📅 ${last}</span></div>
+        <span class="donor-available ${avail?'available':'unavailable'}">${avail?'✅ متاح':'⏳ محتاج يستنى'}</span>
       </div>
-    `;
+      <a href="${wa}" target="_blank" class="whatsapp-btn">💬</a>
+    </div>`;
   }).join('');
 }
+
+// ===== RESULT MODAL =====
+function showResultModal(type, title, msg, cb) {
+  document.getElementById('rm-icon').textContent  = type==='success' ? '✅' : '❌';
+  document.getElementById('rm-title').textContent = title;
+  document.getElementById('rm-title').style.color = type==='success' ? '#2D7A3A' : '#C0000C';
+  document.getElementById('rm-msg').textContent   = msg;
+  document.getElementById('result-modal').classList.add('show');
+  rmCallback = cb || null;
+}
+function closeResultModal() {
+  document.getElementById('result-modal').classList.remove('show');
+  if (rmCallback) { rmCallback(); rmCallback=null; }
+}
+
+// ===== TOAST =====
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// ===== ADMIN =====
+async function getStoredPass() {
+  try {
+    const d = await db('admin_config?key=eq.admin_password&select=value');
+    if (d && d.length) return d[0].value;
+  } catch(_){}
+  return DEFAULT_PASS;
+}
+
+function openAdminLogin() {
+  document.getElementById('admin-overlay').classList.add('show');
+  document.getElementById('admin-login-form').style.display='block';
+  document.getElementById('admin-change-form').style.display='none';
+  document.getElementById('admin-dashboard').style.display='none';
+  document.getElementById('admin-modal-title').textContent='🔐 دخول الأدمن';
+  setTimeout(()=>document.getElementById('admin-pass').focus(),200);
+}
+
+function closeAdmin() {
+  document.getElementById('admin-overlay').classList.remove('show');
+  document.getElementById('admin-pass').value='';
+}
+
+async function adminLogin() {
+  const pass = document.getElementById('admin-pass').value;
+  if (!pass) { showToast('أدخل كلمة السر','error'); return; }
+  const stored = await getStoredPass();
+  if (pass !== stored) { showToast('كلمة السر غلط','error'); return; }
+  if (stored === DEFAULT_PASS) {
+    document.getElementById('admin-login-form').style.display='none';
+    document.getElementById('admin-change-form').style.display='block';
+    document.getElementById('admin-modal-title').textContent='🔑 تغيير كلمة السر';
+  } else {
+    enterDashboard();
+  }
+}
+
+async function changeAdminPass() {
+  const np = document.getElementById('new-pass').value.trim();
+  const cp = document.getElementById('confirm-pass').value.trim();
+  if (np.length < 6)     { showToast('6 أحرف على الأقل','error'); return; }
+  if (np===DEFAULT_PASS) { showToast('اختار كلمة سر مختلفة','error'); return; }
+  if (np!==cp)           { showToast('كلمتا السر مش متطابقتين','error'); return; }
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/admin_config`, {
+      method:'POST',
+      headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'},
+      body: JSON.stringify({key:'admin_password', value:np})
+    });
+    showToast('✅ تم تغيير كلمة السر','success');
+    document.getElementById('new-pass').value='';
+    document.getElementById('confirm-pass').value='';
+    enterDashboard();
+  } catch(e) { showToast('خطأ في الحفظ','error'); }
+}
+
+function showAdminChangePass() {
+  document.getElementById('admin-dashboard').style.display='none';
+  document.getElementById('admin-change-form').style.display='block';
+  document.getElementById('admin-modal-title').textContent='🔑 تغيير كلمة السر';
+}
+
+function enterDashboard() {
+  document.getElementById('admin-login-form').style.display='none';
+  document.getElementById('admin-change-form').style.display='none';
+  document.getElementById('admin-dashboard').style.display='block';
+  document.getElementById('admin-modal-title').textContent='⚙️ لوحة الأدمن';
+  loadAdminData();
+}
+
+async function loadAdminData() {
+  await loadDonors();
+  const avail = allDonors.filter(isAvailable).length;
+  document.getElementById('admin-stats').innerHTML = `
+    <div style="background:#FFF0F0;padding:12px;border-radius:10px;text-align:center;">
+      <div style="font-size:22px;font-weight:900;color:#C0000C;">${allDonors.length}</div>
+      <div style="font-size:11px;color:#888;">إجمالي المتبرعين</div>
+    </div>
+    <div style="background:#E8F5EA;padding:12px;border-radius:10px;text-align:center;">
+      <div style="font-size:22px;font-weight:900;color:#2D7A3A;">${avail}</div>
+      <div style="font-size:11px;color:#888;">متاح الآن</div>
+    </div>`;
+  document.getElementById('admin-tbody').innerHTML = allDonors.map(d=>`
+    <tr>
+      <td>${d.name}</td>
+      <td><strong style="color:#C0000C">${d.blood_type}</strong></td>
+      <td dir="ltr">${d.phone}</td>
+      <td>${d.last_donation_date?new Date(d.last_donation_date).toLocaleDateString('ar-EG'):'-'}</td>
+      <td><button class="delete-row" onclick="deleteDonor('${d.id}','${d.name}')">🗑️</button></td>
+    </tr>`).join('');
+}
+
+// ===== ADMIN: MANUAL ADD DONOR =====
+let adminAddBTVal = null;
+function toggleAdminAddForm() {
+  const el = document.getElementById('admin-add-form');
+  el.style.display = el.style.display==='none' ? 'block' : 'none';
+}
+function selectAdminBT(btn, bt) {
+  document.querySelectorAll('#admin-add-bt-selector .bt-option').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  adminAddBTVal = bt;
+}
+async function adminAddDonor() {
+  const name  = document.getElementById('admin-add-name').value.trim();
+  const phone = document.getElementById('admin-add-phone').value.trim();
+  const nid   = document.getElementById('admin-add-nid').value.trim();
+  const last  = document.getElementById('admin-add-last-donate').value;
+
+  if (!name)                 { showToast('أدخل الاسم','error'); return; }
+  if (!isFourPartName(name)) { showToast('لازم يكون الاسم رباعي (4 أسماء على الأقل)','error'); return; }
+  if (phone.length < 10)     { showToast('أدخل رقم موبايل صحيح','error'); return; }
+  if (!adminAddBTVal)        { showToast('اختار فصيلة الدم','error'); return; }
+  if (nid.length !== 4)      { showToast('أدخل آخر 4 أرقام من البطاقة','error'); return; }
+
+  const btn = document.getElementById('admin-add-btn');
+  btn.disabled = true; btn.textContent = 'جاري الإضافة...';
+  try {
+    const dup = await checkDuplicate(name, phone);
+    if (dup) {
+      const reason = dup.phone === phone ? 'رقم الموبايل ده' : 'الاسم ده';
+      showToast(`${reason} مسجل قبل كده`, 'error');
+      return;
+    }
+    await db('donors', {
+      method: 'POST',
+      prefer: 'return=minimal',
+      body: { name, phone, blood_type: adminAddBTVal, national_id_last4: nid, last_donation_date: last||null }
+    });
+    document.getElementById('admin-add-name').value = '';
+    document.getElementById('admin-add-phone').value = '';
+    document.getElementById('admin-add-nid').value = '';
+    document.getElementById('admin-add-last-donate').value = '';
+    document.querySelectorAll('#admin-add-bt-selector .bt-option').forEach(b=>b.classList.remove('selected'));
+    adminAddBTVal = null;
+    showToast('✅ تم إضافة المتبرع','success');
+    loadAdminData();
+  } catch(e) {
+    if (e.code==='23505' || (e.message && e.message.includes('unique'))) {
+      showToast('رقم الموبايل ده مسجل قبل كده','error');
+    } else {
+      showToast('حصل خطأ: '+e.message,'error');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✅ إضافة المتبرع';
+  }
+}
+
+async function deleteDonor(id, name) {
+  if (!confirm(`هتحذف ${name}؟`)) return;
+  try { await db(`donors?id=eq.${id}`,{method:'DELETE'}); showToast('تم الحذف','success'); loadAdminData(); }
+  catch(e) { showToast('خطأ في الحذف','error'); }
+}
+
+function openInSheets() {
+  if (!allDonors.length) { showToast('مفيش داتا','error'); return; }
+  const rows = [['الاسم','فصيلة الدم','الموبايل','آخر تبرع','تاريخ التسجيل']];
+  allDonors.forEach(d=>rows.push([d.name,d.blood_type,d.phone,d.last_donation_date||'',d.created_at?new Date(d.created_at).toLocaleDateString('ar-EG'):'']));
+  const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
+  a.download = 'بنك_دم_الديرس.csv';
+  a.click();
+  setTimeout(()=>window.open('https://sheets.new','_blank'),800);
+}
+
+// ===== URL PARAMS =====
+function checkURL() {
+  const type = new URLSearchParams(window.location.search).get('type');
+  if (type && BLOOD_TYPES.includes(type)) quickSearch(type);
+}
+
+// ===== INIT =====
+loadDonors();
+checkURL();
+document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
 </script>
-
-<div class="footer-credit">Made by Adel Elbatawy</div>
-
+  <div style="text-align: center; padding: 20px; color: #666; font-size: 14px;">Made by Adel Elbatawy</div>
 </body>
 </html>
