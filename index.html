@@ -230,8 +230,21 @@
       <small style="color:var(--gray);font-size:11px;margin-top:4px;display:block;">⚠️ هتحتاجها لو عاوز تعدل بياناتك بعدين</small>
     </div>
     <div class="form-group">
-      <label>آخر مرة تبرعت (اختياري)</label>
-      <input type="date" id="reg-last-donate">
+      <label>آخر مرة اتبرعت امتى؟ (اختياري)</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;">
+        <button type="button" class="donate-time-btn" onclick="selectDonateTime(this,'never')" style="border:2px solid var(--border);border-radius:12px;padding:12px 8px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;background:white;cursor:pointer;transition:all .2s;">
+          🩸 أول مرة
+        </button>
+        <button type="button" class="donate-time-btn" onclick="selectDonateTime(this,'more6')" style="border:2px solid var(--border);border-radius:12px;padding:12px 8px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;background:white;cursor:pointer;transition:all .2s;">
+          ✅ أكتر من 6 شهور
+        </button>
+        <button type="button" class="donate-time-btn" onclick="selectDonateTime(this,'3to6')" style="border:2px solid var(--border);border-radius:12px;padding:12px 8px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;background:white;cursor:pointer;transition:all .2s;">
+          ⏳ من 3 لـ 6 شهور
+        </button>
+        <button type="button" class="donate-time-btn" onclick="selectDonateTime(this,'less3')" style="border:2px solid var(--border);border-radius:12px;padding:12px 8px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;background:white;cursor:pointer;transition:all .2s;">
+          ❌ أقل من 3 شهور
+        </button>
+      </div>
     </div>
     <button class="submit-btn" onclick="registerDonor()" id="reg-btn">✅ سجّل اسمي</button>
     <button class="submit-btn" style="background:#6c757d;margin-top:8px;" onclick="showPage('page-update')">✏️ تحديث بياناتي</button>
@@ -427,7 +440,28 @@ const BLOOD_TYPES = ['A+','A-','B+','B-','AB+','AB-','O+','O-'];
 
 let allDonors = [];
 let searchFilter = 'all';
-let selectedBTVal = null;
+let selectedDonateTime = null;
+
+function selectDonateTime(btn, val) {
+  document.querySelectorAll('.donate-time-btn').forEach(b => {
+    b.style.background = 'white';
+    b.style.borderColor = 'var(--border)';
+    b.style.color = 'var(--dark)';
+  });
+  btn.style.background = 'var(--red)';
+  btn.style.borderColor = 'var(--red)';
+  btn.style.color = 'white';
+  selectedDonateTime = val;
+}
+
+function donatTimeToDate(val) {
+  if (!val || val === 'never') return null;
+  const d = new Date();
+  if (val === 'less3') { d.setMonth(d.getMonth() - 1); }
+  else if (val === '3to6') { d.setMonth(d.getMonth() - 4); }
+  else if (val === 'more6') { d.setMonth(d.getMonth() - 7); }
+  return d.toISOString().split('T')[0];
+}
 let updSelectedBTVal = null;
 let updDonorId = null;
 let rmCallback = null;
@@ -532,7 +566,7 @@ async function registerDonor() {
   const phone = document.getElementById('reg-phone').value.trim();
   const age   = document.getElementById('reg-age').value.trim();
   const nid   = document.getElementById('reg-nid').value.trim();
-  const last  = document.getElementById('reg-last-donate').value;
+  const last = donatTimeToDate(selectedDonateTime);
 
   if (!name)               { showToast('أدخل اسمك', 'error'); return; }
   if (name.trim().split(/\s+/).filter(Boolean).length < 3) { showToast('لازم تكتب الاسم ثلاثي (3 أسماء على الأقل)', 'error'); return; }
@@ -562,7 +596,8 @@ async function registerDonor() {
     document.getElementById('reg-phone').value = '';
     document.getElementById('reg-age').value = '';
     document.getElementById('reg-nid').value = '';
-    document.getElementById('reg-last-donate').value = '';
+    document.querySelectorAll('.donate-time-btn').forEach(b => { b.style.background='white'; b.style.borderColor='var(--border)'; b.style.color='var(--dark)'; });
+    selectedDonateTime = null;
     document.querySelectorAll('#page-register .bt-option').forEach(b=>b.classList.remove('selected'));
     selectedBTVal = null;
     loadDonors();
