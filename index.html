@@ -187,6 +187,9 @@
   <div class="info-banner">
     💡 <strong>مهم:</strong> المتبرع يكون مناسب للتبرع بعد مرور 3 شهور من آخر تبرع.
   </div>
+  <div style="text-align:center;padding:16px;font-size:12px;color:var(--gray);">
+    Made by <strong style="color:var(--red-dark);">Adel ELbatawy</strong>
+  </div>
 </div>
 
 <!-- REGISTER -->
@@ -197,8 +200,8 @@
   </div>
   <div class="form-body">
     <div class="form-group">
-      <label><span>*</span> الاسم رباعي (4 أسماء)</label>
-      <input type="text" id="reg-name" placeholder="مثال: محمد أحمد علي حسن" maxlength="80">
+      <label><span>*</span> الاسم ثلاثي (3 أسماء)</label>
+      <input type="text" id="reg-name" placeholder="مثال: محمد أحمد علي" maxlength="80">
     </div>
     <div class="form-group">
       <label><span>*</span> رقم الموبايل</label>
@@ -216,6 +219,10 @@
         <button class="bt-option" onclick="selectBT(this,'O+')">O+</button>
         <button class="bt-option" onclick="selectBT(this,'O-')">O-</button>
       </div>
+    </div>
+    <div class="form-group">
+      <label><span>*</span> السن</label>
+      <input type="number" id="reg-age" placeholder="مثال: 25" min="18" max="65">
     </div>
     <div class="form-group">
       <label><span>*</span> آخر 4 أرقام من بطاقتك</label>
@@ -386,6 +393,20 @@
         <button class="submit-btn" style="margin:0;" onclick="adminAddDonor()" id="admin-add-btn">✅ إضافة المتبرع</button>
       </div>
       <div id="admin-stats" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;"></div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--gray);margin-bottom:8px;">📥 تنزيل CSV حسب الفصيلة:</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <button onclick="downloadCSV('all')" style="background:#1a73e8;color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">الكل</button>
+          <button onclick="downloadCSV('A+')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">A+</button>
+          <button onclick="downloadCSV('A-')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">A-</button>
+          <button onclick="downloadCSV('B+')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">B+</button>
+          <button onclick="downloadCSV('B-')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">B-</button>
+          <button onclick="downloadCSV('AB+')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">AB+</button>
+          <button onclick="downloadCSV('AB-')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">AB-</button>
+          <button onclick="downloadCSV('O+')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">O+</button>
+          <button onclick="downloadCSV('O-')" style="background:var(--red);color:white;border:none;border-radius:8px;padding:8px 4px;font-family:'Cairo',sans-serif;font-size:11px;cursor:pointer;">O-</button>
+        </div>
+      </div>
       <div style="overflow-x:auto;">
         <table class="admin-table">
           <thead><tr><th>الاسم</th><th>فصيلة</th><th>موبايل</th><th>آخر تبرع</th><th></th></tr></thead>
@@ -509,13 +530,15 @@ function selectBT(btn, bt) {
 async function registerDonor() {
   const name  = document.getElementById('reg-name').value.trim();
   const phone = document.getElementById('reg-phone').value.trim();
+  const age   = document.getElementById('reg-age').value.trim();
   const nid   = document.getElementById('reg-nid').value.trim();
   const last  = document.getElementById('reg-last-donate').value;
 
   if (!name)               { showToast('أدخل اسمك', 'error'); return; }
-  if (!isFourPartName(name)) { showToast('لازم تكتب الاسم رباعي (4 أسماء على الأقل)', 'error'); return; }
+  if (name.trim().split(/\s+/).filter(Boolean).length < 3) { showToast('لازم تكتب الاسم ثلاثي (3 أسماء على الأقل)', 'error'); return; }
   if (phone.length < 10)   { showToast('أدخل رقم موبايل صحيح', 'error'); return; }
   if (!selectedBTVal)      { showToast('اختار فصيلة الدم', 'error'); return; }
+  if (!age || age < 18 || age > 65) { showToast('أدخل سن صحيح (18-65)', 'error'); return; }
   if (nid.length !== 4)    { showToast('أدخل آخر 4 أرقام من بطاقتك', 'error'); return; }
 
   const btn = document.getElementById('reg-btn');
@@ -532,11 +555,12 @@ async function registerDonor() {
     await db('donors', {
       method: 'POST',
       prefer: 'return=minimal',
-      body: { name, phone, blood_type: selectedBTVal, national_id_last4: nid, last_donation_date: last||null }
+      body: { name, phone, blood_type: selectedBTVal, national_id_last4: nid, last_donation_date: last||null, age: parseInt(age) }
     });
     // تنظيف الفورم
     document.getElementById('reg-name').value = '';
     document.getElementById('reg-phone').value = '';
+    document.getElementById('reg-age').value = '';
     document.getElementById('reg-nid').value = '';
     document.getElementById('reg-last-donate').value = '';
     document.querySelectorAll('#page-register .bt-option').forEach(b=>b.classList.remove('selected'));
@@ -779,7 +803,7 @@ async function adminAddDonor() {
   const last  = document.getElementById('admin-add-last-donate').value;
 
   if (!name)                 { showToast('أدخل الاسم','error'); return; }
-  if (!isFourPartName(name)) { showToast('لازم يكون الاسم رباعي (4 أسماء على الأقل)','error'); return; }
+  if (name.trim().split(/\s+/).filter(Boolean).length < 3) { showToast('لازم يكون الاسم ثلاثي (3 أسماء على الأقل)','error'); return; }
   if (phone.length < 10)     { showToast('أدخل رقم موبايل صحيح','error'); return; }
   if (!adminAddBTVal)        { showToast('اختار فصيلة الدم','error'); return; }
   if (nid.length !== 4)      { showToast('أدخل آخر 4 أرقام من البطاقة','error'); return; }
@@ -825,15 +849,29 @@ async function deleteDonor(id, name) {
 }
 
 function openInSheets() {
-  if (!allDonors.length) { showToast('مفيش داتا','error'); return; }
-  const rows = [['الاسم','فصيلة الدم','الموبايل','آخر تبرع','تاريخ التسجيل']];
-  allDonors.forEach(d=>rows.push([d.name,d.blood_type,d.phone,d.last_donation_date||'',d.created_at?new Date(d.created_at).toLocaleDateString('ar-EG'):'']));
-  const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  downloadCSV('all');
+}
+
+function downloadCSV(filterBT) {
+  let list = allDonors;
+  if (filterBT && filterBT !== 'all') list = allDonors.filter(d => d.blood_type === filterBT);
+  if (!list.length) { showToast('مفيش داتا لهذه الفصيلة', 'error'); return; }
+
+  const rows = [['الاسم','السن','فصيلة الدم','الموبايل','آخر تبرع','تاريخ التسجيل']];
+  list.forEach(d => rows.push([
+    d.name,
+    d.age || '-',
+    d.blood_type,
+    d.phone,
+    d.last_donation_date || '',
+    d.created_at ? new Date(d.created_at).toLocaleDateString('ar-EG') : ''
+  ]));
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const fname = filterBT === 'all' ? 'بنك_دم_الديرس_كل_الفصايل' : `بنك_دم_الديرس_فصيلة_${filterBT}`;
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}));
-  a.download = 'بنك_دم_الديرس.csv';
+  a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'}));
+  a.download = fname + '.csv';
   a.click();
-  setTimeout(()=>window.open('https://sheets.new','_blank'),800);
 }
 
 // ===== URL PARAMS =====
@@ -847,6 +885,5 @@ loadDonors();
 checkURL();
 document.getElementById('admin-overlay').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
 </script>
-  <div style="text-align: center; padding: 20px; color: #666; font-size: 14px;">Made by Adel Elbatawy</div>
 </body>
 </html>
